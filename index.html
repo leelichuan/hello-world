@@ -1,90 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <style>
-    #map-canvas { width:500px; height:400px; }
-    .layer-wizard-search-label { font-family: sans-serif };
-  </style>
-  <script type="text/javascript"
-    src="http://maps.google.com/maps/api/js?sensor=false">
-  </script>
-  <script type="text/javascript">
-    var map;
-    var layer_0;
-    var layer_1;
-    function initialize() {
-      map = new google.maps.Map(document.getElementById('map-canvas'), {
-        center: new google.maps.LatLng(1.2483949575738185, 103.82468814617164),
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-      layer_0 = new google.maps.FusionTablesLayer({
-        query: {
-          select: "col2",
-          from: "13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL",
-          where: " col0 in ('MK34-00491L', 'MK34-0001', 'MK34-00490X', 'MK34-00492C', 'MK34-00493M', 'MK34-00494W', 'MK34-00495V', 'MK34-02234A', 'MK34-02235K', 'MK34-02846N', 'MK34-02303V', 'MK34-02304P', 'MK34-02326A', 'MK34-02369K', 'MK34-02370T', 'MK34-02371A', 'MK34-02372K', 'MK34-02373N', 'MK34-02374X', 'MK34-02375L', 'MK34-02376C', 'MK34-02377M', 'MK34-02421M', 'MK34-02422W', 'MK34-02423V', 'MK34-02424P', 'MK34-02425T', 'MK34-02427K', 'MK34-02428N', 'MK34-02429X', 'MK34-02613M', 'MK34-02614W', 'MK34-02844A', 'MK34-02845K', 'MK34-02302W', 'MK34-02286L', 'MK34-02287C', 'MK34-02288M', 'MK34-02299X', 'MK34-02300C', 'MK34-02301M')"
-        },
-        map: map,
+<head>
+<meta name="viewport"/>
+<title>SENTOSA GREEN AREA - Google Fusion Tables</title>
+<style type="text/css">
+html, body, #googft-mapCanvas {
+  height: 300px;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+}
+#googft-legend{background-color:#fff;border:1px solid #000;font-family:Arial,sans-serif;font-size:12px;margin:5px;padding:10px 10px 8px}#googft-legend p{font-weight:bold;margin-top:0}#googft-legend div{margin-bottom:5px}.googft-legend-swatch{border:1px solid;float:left;height:12px;margin-right:8px;width:20px}.googft-legend-range{margin-left:0}.googft-dot-icon{margin-right:8px}.googft-paddle-icon{height:24px;left:-8px;margin-right:-8px;position:relative;vertical-align:middle;width:24px}.googft-legend-source{margin-bottom:0;margin-top:8px}.googft-legend-source a{color:#666;font-size:11px}
+</style>
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3"></script>
+
+<script type="text/javascript">
+  function initialize() {
+    google.maps.visualRefresh = true;
+    var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
+      (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
+    if (isMobile) {
+      var viewport = document.querySelector("meta[name=viewport]");
+      viewport.setAttribute('content', 'initial-scale=1.0, user-scalable=no');
+    }
+    var mapDiv = document.getElementById('googft-mapCanvas');
+    mapDiv.style.width = isMobile ? '100%' : '500px';
+    mapDiv.style.height = isMobile ? '100%' : '300px';
+    var map = new google.maps.Map(mapDiv, {
+      center: new google.maps.LatLng(1.248394957573844, 103.82468814617164),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('googft-legend-open'));
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('googft-legend'));
+
+    layer = new google.maps.FusionTablesLayer({
+      map: map,
+      heatmap: { enabled: false },
+      query: {
+        select: "col2",
+        from: "13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL",
+        where: "col0 in (\x27MK34-00491L\x27, \x27MK34-0001\x27, \x27MK34-00490X\x27, \x27MK34-00492C\x27, \x27MK34-00493M\x27, \x27MK34-00494W\x27, \x27MK34-00495V\x27, \x27MK34-02234A\x27, \x27MK34-02235K\x27, \x27MK34-02846N\x27, \x27MK34-02303V\x27, \x27MK34-02304P\x27, \x27MK34-02326A\x27, \x27MK34-02369K\x27, \x27MK34-02370T\x27, \x27MK34-02371A\x27, \x27MK34-02372K\x27, \x27MK34-02373N\x27, \x27MK34-02374X\x27, \x27MK34-02375L\x27, \x27MK34-02376C\x27, \x27MK34-02377M\x27, \x27MK34-02421M\x27, \x27MK34-02422W\x27, \x27MK34-02423V\x27, \x27MK34-02424P\x27, \x27MK34-02425T\x27, \x27MK34-02427K\x27, \x27MK34-02428N\x27, \x27MK34-02429X\x27, \x27MK34-02613M\x27, \x27MK34-02614W\x27, \x27MK34-02844A\x27, \x27MK34-02845K\x27, \x27MK34-02302W\x27, \x27MK34-02286L\x27, \x27MK34-02287C\x27, \x27MK34-02288M\x27, \x27MK34-02299X\x27, \x27MK34-02300C\x27, \x27MK34-02301M\x27)"
+      },
+      options: {
         styleId: 2,
         templateId: 2
-      });
-      layer_1 = new google.maps.FusionTablesLayer({
-        query: {
-          select: "col2",
-          from: "13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL",
-          where: " col0 in ('MK34-00491L', 'MK34-0001', 'MK34-00490X', 'MK34-00492C', 'MK34-00493M', 'MK34-00494W', 'MK34-00495V', 'MK34-02234A', 'MK34-02235K', 'MK34-02846N', 'MK34-02303V', 'MK34-02304P', 'MK34-02326A', 'MK34-02369K', 'MK34-02370T', 'MK34-02371A', 'MK34-02372K', 'MK34-02373N', 'MK34-02374X', 'MK34-02375L', 'MK34-02376C', 'MK34-02377M', 'MK34-02421M', 'MK34-02422W', 'MK34-02423V', 'MK34-02424P', 'MK34-02425T', 'MK34-02427K', 'MK34-02428N', 'MK34-02429X', 'MK34-02613M', 'MK34-02614W', 'MK34-02844A', 'MK34-02845K', 'MK34-02302W', 'MK34-02286L', 'MK34-02287C', 'MK34-02288M', 'MK34-02299X', 'MK34-02300C', 'MK34-02301M')"
-        },
-        map: map,
-        styleId: 2,
-        templateId: 2
-      });
-    }
-    function changeMap_0() {
-      var whereClause = " col0 in ('MK34-00491L', 'MK34-0001', 'MK34-00490X', 'MK34-00492C', 'MK34-00493M', 'MK34-00494W', 'MK34-00495V', 'MK34-02234A', 'MK34-02235K', 'MK34-02846N', 'MK34-02303V', 'MK34-02304P', 'MK34-02326A', 'MK34-02369K', 'MK34-02370T', 'MK34-02371A', 'MK34-02372K', 'MK34-02373N', 'MK34-02374X', 'MK34-02375L', 'MK34-02376C', 'MK34-02377M', 'MK34-02421M', 'MK34-02422W', 'MK34-02423V', 'MK34-02424P', 'MK34-02425T', 'MK34-02427K', 'MK34-02428N', 'MK34-02429X', 'MK34-02613M', 'MK34-02614W', 'MK34-02844A', 'MK34-02845K', 'MK34-02302W', 'MK34-02286L', 'MK34-02287C', 'MK34-02288M', 'MK34-02299X', 'MK34-02300C', 'MK34-02301M')";
-      var searchString = document.getElementById('search-string_0').value.replace(/'/g, "\\'");
-      if (searchString != '--Select--') {
-        whereClause += " AND 'LOT_NO' CONTAINS IGNORING CASE '" + searchString + "'";
       }
-      layer_0.setOptions({
-        query: {
-          select: "col2",
-          from: "13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL",
-          where: whereClause
-        }
-      });
-    }
-    function changeMap_1() {
-      var whereClause = " col0 in ('MK34-00491L', 'MK34-0001', 'MK34-00490X', 'MK34-00492C', 'MK34-00493M', 'MK34-00494W', 'MK34-00495V', 'MK34-02234A', 'MK34-02235K', 'MK34-02846N', 'MK34-02303V', 'MK34-02304P', 'MK34-02326A', 'MK34-02369K', 'MK34-02370T', 'MK34-02371A', 'MK34-02372K', 'MK34-02373N', 'MK34-02374X', 'MK34-02375L', 'MK34-02376C', 'MK34-02377M', 'MK34-02421M', 'MK34-02422W', 'MK34-02423V', 'MK34-02424P', 'MK34-02425T', 'MK34-02427K', 'MK34-02428N', 'MK34-02429X', 'MK34-02613M', 'MK34-02614W', 'MK34-02844A', 'MK34-02845K', 'MK34-02302W', 'MK34-02286L', 'MK34-02287C', 'MK34-02288M', 'MK34-02299X', 'MK34-02300C', 'MK34-02301M')";
-      var searchString = document.getElementById('search-string_1').value.replace(/'/g, "\\'");
-      if (searchString != '--Select--') {
-        whereClause += " AND 'TENANT' CONTAINS IGNORING CASE '" + searchString + "'";
+    });
+
+    if (isMobile) {
+      var legend = document.getElementById('googft-legend');
+      var legendOpenButton = document.getElementById('googft-legend-open');
+      var legendCloseButton = document.getElementById('googft-legend-close');
+      legend.style.display = 'none';
+      legendOpenButton.style.display = 'block';
+      legendCloseButton.style.display = 'block';
+      legendOpenButton.onclick = function() {
+        legend.style.display = 'block';
+        legendOpenButton.style.display = 'none';
       }
-      layer_1.setOptions({
-        query: {
-          select: "col2",
-          from: "13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL",
-          where: whereClause
-        }
-      });
+      legendCloseButton.onclick = function() {
+        legend.style.display = 'none';
+        legendOpenButton.style.display = 'block';
+      }
     }
-    google.maps.event.addDomListener(window, 'load', initialize);
-  </script>
-  </head>
-  <body>
-    <div id="map-canvas"></div>
-    <div style="margin-top: 10px;">
-      <label class="layer-wizard-search-label">
-        LOT_NO
-        <input type="text" id="search-string_0">
-        <input type="button" onclick="changeMap_0()" value="Search">
-      </label> 
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+<body>
+  <div id="googft-mapCanvas"></div>
+  <input id="googft-legend-open" style="display:none" type="button" value="Legend">
+  <div id="googft-legend">
+    <p id="googft-legend-title">Legend</p>
+    <div>
+      <span class="googft-legend-swatch" style="background-color: #d9ead3"></span>
+      <span class="googft-legend-range">0</span>
     </div>
-    <div style="margin-top: 10px;">
-      <label class="layer-wizard-search-label">
-        TENANT
-        <input type="text" id="search-string_1">
-        <input type="button" onclick="changeMap_1()" value="Search">
-      </label> 
+    <div>
+      <span class="googft-legend-swatch" style="background-color: #a5ef63"></span>
+      <br/>
     </div>
-  </body>
+    <div>
+      <span class="googft-legend-swatch" style="background-color: #50aa00"></span>
+      <br/>
+    </div>
+    <div>
+      <span class="googft-legend-swatch" style="background-color: #267114"></span>
+      <span class="googft-legend-range">100</span>
+    </div>
+    <input id="googft-legend-close" style="display:none" type="button" value="Hide">
+  </div>
+
+</body>
 </html>
