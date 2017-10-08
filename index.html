@@ -132,15 +132,15 @@
           zoom: 15
         });
         
-       // var layer = new google.maps.FusionTablesLayer({
-       //     query: {
-       //       select: 'geometry',
-       //       from: '13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL',
-      //        where: 'AREA:sqm > 0'
-      //      }
-      //  });
-      //  layer.setMap(map);
-     // }    
+        var layer = new google.maps.FusionTablesLayer({
+            query: {
+              select: 'geometry',
+              from: '13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL',
+              where: 'AREA_sqm > 0'
+            }
+        });
+        layer.setMap(map);
+      }    
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
         var types = document.getElementById('type-selector');
