@@ -131,6 +131,19 @@
           center: {lat: 1.251463, lng: 103.82478},
           zoom: 15
         });
+        
+        
+        $(function() {
+          var myMap = new MapsLib({
+            fusionTableId:      "13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL",
+            googleApiKey:       "AIzaSyBwJ1Uqr6rHARRtczzm4i2CRXo8JeOVLJs",
+            locationColumn:     "geometry",
+            map_center:         [1.251463, 103.82478],
+            defaultZoom:        15,
+            locationScope:      "singapore"
+          });
+          myMap.setMap(map);
+                  
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
         var types = document.getElementById('type-selector');
