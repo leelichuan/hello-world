@@ -37,55 +37,19 @@
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwJ1Uqr6rHARRtczzm4i2CRXo8JeOVLJs&callback=initMap">
 </script>
-        
-        $(function() {
-          var myMap = new MapsLib({
-            fusionTableId:      "13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL",
-            googleApiKey:       "AIzaSyBwJ1Uqr6rHARRtczzm4i2CRXo8JeOVLJs",
-            locationColumn:     "geometry",
-            map_center:         [1.251463, 103.82478],
-            defaultZoom:        15,
-            locationScope:      "singapore"
-          });
-          var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search_address'));
-      
-          $(':checkbox').click(function(){
-            myMap.doSearch();
-          });
-          $(':radio').click(function(){
-            myMap.doSearch();
-          });
-          
-          $('#search_radius').change(function(){
-            myMap.doSearch();
-          });
-          
-          $('#search').click(function(){
-            myMap.doSearch();
-          });
-          
-          $('#find_me').click(function(){
-            myMap.findMe(); 
-            return false;
-          });
-          
-          $('#reset').click(function(){
-            myMap.reset(); 
-            return false;
-          });
-          
-          $(":text").keydown(function(e){
-              var key =  e.keyCode ? e.keyCode : e.which;
-              if(key === 13) {
-                  $('#search').click();
-                  return false;
-              }
-          });
-        });
-      //]]>
-    </script>
+    function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 41.850033, lng: -87.6500523},
+    zoom: 11
+  });
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0_zhl_g4AidzaNHDckptQ1kEZ7QMJEdI&callback=initMap">
+  var layer = new google.maps.FusionTablesLayer({
+    query: {
+      select: '\'Geocodable address\'',
+      from: '13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL'
+    }
+  });
+  layer.setMap(map);
+}    
     </script>
   </body>
