@@ -1,42 +1,55 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Geocoding service</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
-#map {
-  height: 100%;
-}
-/* Optional: Makes the sample page fill the window. */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-    </style>
-  </head>
-  <body>
-<div id="map"></div>
-<!-- Replace the value of the key parameter with your own API key. -->
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwJ1Uqr6rHARRtczzm4i2CRXo8JeOVLJs&callback=initMap">
-</script>
-    function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 41.850033, lng: -87.6500523},
-    zoom: 11
-  });
+<!--
+You are free to copy and use this sample in accordance with the terms of the
+Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
+Modified https://code.google.com/apis/ajax/playground/?type=visualization#using_the_query_language
+-->
 
-  var layer = new google.maps.FusionTablesLayer({
-    query: {
-      select: '\'geometry\'',
-      from: '13xMXwG4wnufhn1swQM2qh_8mfSDxV2mJS8W9crcL'
-    }
-  });
-  layer.setMap(map);
-}    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>
+      Google Visualization API Sample
+    </title>
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['linechart']});
     </script>
+    <script type="text/javascript">
+    var visualization;
+    function drawVisualization() {
+      // To see the data that this visualization uses, browse to
+      // https://www.google.com/fusiontables/DataSource?docid=1hoqEqL-eU7AnO2yG4xsaYbeWBRWWNs_yoGHXN2pk
+      // With Fusion Tables the base query url is always the same http://www.google.com/fusiontables/gvizdata?tq=
+      // To identify which table of data we are querying we use the FROM query with the docid in the query
+      // We also specify columns by their name not A, B, C, etc. Note back-quotes ` don't appear to work when
+      // referencing column ids that contain spaces
+      
+      var query = new google.visualization.Query(
+        'https://www.google.com/fusiontables/gvizdata?tq=');
+    
+      // Apply query language.
+      query.setQuery('SELECT country_name, population_density FROM 1hoqEqL-eU7AnO2yG4xsaYbeWBRWWNs_yoGHXN2pk WHERE population_density > 100 ORDER BY population_density' );
+    
+      // Send the query with a callback function.
+      query.send(handleQueryResponse);
+    }
+    
+    function handleQueryResponse(response) {
+      if (response.isError()) {
+        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        return;
+      }
+    
+      var data = response.getDataTable();
+      visualization = new google.visualization.LineChart(document.getElementById('visualization'));
+      visualization.draw(data, {legend: 'bottom'});
+    }
+    
+    google.setOnLoadCallback(drawVisualization);
+    </script>
+  </head>
+  <body style="font-family: Arial;border: 0 none;">
+    <div id="visualization" style="height: 400px; width: 400px;"></div>
   </body>
+</html>
